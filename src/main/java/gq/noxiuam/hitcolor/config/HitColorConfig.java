@@ -142,11 +142,11 @@ public class HitColorConfig extends Config {
         super(new Mod(HitColor.NAME, ModType.UTIL_QOL), HitColor.MODID + ".json");
         initialize();
 
-        addDependency("affectedByBrightness", () -> globalOverride != 0);
-        addDependency("affectArmor", () -> globalOverride != 0);
-        addDependency("removeGlintOnArmor", () -> globalOverride != 0 && this.affectArmor);
-        addDependency("animationType", () -> globalOverride != 0);
-        addDependency("hitColor", () -> globalOverride != 0);
+        addDependency("affectedByBrightness", "globalOverride", () -> globalOverride != 0);
+        addDependency("affectArmor", "globalOverride", () -> globalOverride != 0);
+        addDependency("removeGlintOnArmor", "globalOverride", () -> globalOverride != 0 && this.affectArmor);
+        addDependency("animationType", "globalOverride", () -> globalOverride != 0);
+        addDependency("hitColor", "globalOverride", () -> globalOverride != 0);
 
         for (Map.Entry<String, HitColorConfiguration> entity : entities.entrySet()) {
             addDependency(entity.getKey() + ".removeGlintOnArmor", entity.getKey() + ".affectArmor");
